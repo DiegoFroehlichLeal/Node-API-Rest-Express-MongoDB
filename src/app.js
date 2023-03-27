@@ -9,15 +9,6 @@ db.once("open", () => {
 const app = express();
 app.use(express.json());
 
-// const livros = [
-//     {id: 1, "titulo": "Senhor dos Aneis"},
-//     {id: 2, "titulo": "O Hobbit"},
-//     {id: 3, "titulo": "IT A Coisa"},
-//     {id: 4, "titulo": "A Divina Comédia"},
-//     {id: 5, "titulo": "O Mitico Homem-Mês"}
-
-//   ]
-
 app.get('/', (req, res) => {
     res.status(200).send('Aprendizado node');
 })
@@ -25,10 +16,7 @@ app.get('/', (req, res) => {
 app.get('/livros', async (req, res) => {
     const allBooks = await livros.find()
     res.status(200).json(allBooks)
-    // livros.find((err, livros) => {
-    //     res.status(200).json(livros)
-    // })
-  
+
 })
 
 app.post('/livros', (req, res) => {
