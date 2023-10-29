@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Aprendizado node');
 })
 
-app.get('/livro', async (req, res) => {
+app.get('/amostras/listatodas', async (req, res) => {
     const allBooks = await amostras.find()
     res.status(200).json(allBooks)
 
