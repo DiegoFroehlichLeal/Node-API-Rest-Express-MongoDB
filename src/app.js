@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./config/dbConnect.js"
-import livros from "./models/Livro.js";
+import amostras from "./models/amostra.js";
+import 'dotenv/config'
 
 db.on("error", console.log.bind(console, 'Erro de conexão'))
 db.once("open", () => {
@@ -13,37 +14,37 @@ app.get('/', (req, res) => {
     res.status(200).send('Aprendizado node');
 })
 
-app.get('/livros', async (req, res) => {
-    const allBooks = await livros.find()
+app.get('/livro', async (req, res) => {
+    const allBooks = await amostras.find()
     res.status(200).json(allBooks)
 
 })
 
-app.post('/livros', (req, res) => {
-    livros.push(req.body);
+app.post('/amostras', (req, res) => {
+    amostras.push(req.body);
     res.status(201).send('Livro cadastrado com sucesso')
 })
-app.get('/livros/:id', (req, res) => {
+app.get('/amostras/:id', (req, res) => {
     let index = buscaLivro(req.params.id);
-    res.json(livros[index]);
+    res.json(amostras[index]);
 })
 
-app.put('/livros/:id', (req, res) => {
+app.put('/amostras/:id', (req, res) => {
     let index = buscaLivro(req.params.id);
-    livros[index].titulo = req.body.titulo;
-    res.json(livros);
+    amostras[index].titulo = req.body.titulo;
+    res.json(amostras);
 })
 
-app.delete('/livros/:id', (req, res) => {
+app.delete('/amostras/:id', (req, res) => {
     let { id } = req.params;
     let index = buscaLivro(id);
-    livros.splice(index, 1)
+    amostras.splice(index, 1)
     res.send(`Livro ${id} removido com sucesso`)
 })
 
 
 function buscaLivro(id) {
-    return livros.findIndex(livro => livro.id == id)
+    return amostras.findIndex(livro => livro.id == id)
 }
 
 export default app
